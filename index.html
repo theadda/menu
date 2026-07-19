@@ -13,10 +13,10 @@
 <style>
   :root{
     --paper: #FFFFFF;
-    --ink:   #101010;   /* black */
+    --ink:   #101010;
     --muted: #5E5E5E;
     --hair:  #E9E9E9;
-    --cobalt:#0F3CB0;   /* brand blue — logo & lockup only */
+    --cobalt:#0F3CB0;
     --green: #3F7F3A;
     --red:   #B0452B;
     --serif: "Cormorant Garamond", Georgia, serif;
@@ -36,10 +36,22 @@
   .sheet{ background:#FFFFFF; min-height:100vh; min-height:100svh; }
   .page{ max-width:660px; margin:0 auto; padding:0 24px 30px; }
 
-  /* ---------- nav ---------- */
+  /* ---------- hero ---------- */
+  .hero{ text-align:center; padding:34px 0 0; }
+  .hero > *{ animation:rise .55s ease both; }
+  .hero > *:nth-child(2){ animation-delay:.08s; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+  .hero img{ width:min(60%, 290px); height:auto; display:block; margin:0 auto; }
+  .kicker{
+    margin-top:14px; margin-bottom:16px;
+    font-weight:500; font-size:11.5px;
+    letter-spacing:.44em; text-indent:.44em; text-transform:uppercase;
+  }
+
+  /* ---------- tabs ---------- */
   .jump{
     position:sticky; top:0; z-index:9;
-    display:flex; gap:34px; justify-content:center; align-items:center;
+    display:flex; gap:28px; justify-content:center; align-items:center;
     padding:14px 16px;
     background:#FFFFFF;
     border-bottom:1px solid var(--hair);
@@ -59,31 +71,11 @@
   .panel.active{ display:block; animation:fadein .28s ease; }
   @keyframes fadein{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
 
-  /* ---------- hero ---------- */
-  .hero{ text-align:center; padding:34px 0 0; }
-  .hero > *{ animation:rise .55s ease both; }
-  .hero > *:nth-child(2){ animation-delay:.08s; }
-  .hero > *:nth-child(3){ animation-delay:.16s; }
-  .hero > *:nth-child(4){ animation-delay:.24s; }
-  .hero > *:nth-child(5){ animation-delay:.32s; }
-  @keyframes rise{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
-  .hero img{ width:min(60%, 290px); height:auto; display:block; margin:0 auto; }
-  .kicker{
-    margin-top:14px; margin-bottom:16px;
-    font-weight:500; font-size:11.5px;
-    letter-spacing:.44em; text-indent:.44em; text-transform:uppercase;
-  }
-
   /* ---------- sections ---------- */
   section{ padding-top:22px; text-align:center; }
   section h2{
     font-family:var(--serif); font-weight:600;
     font-size:clamp(29px, 6.5vw, 36px); line-height:1.12;
-  }
-  .sec-note{
-    margin-top:8px;
-    font-size:10px; font-weight:500; letter-spacing:.24em; text-indent:.24em;
-    text-transform:uppercase; color:var(--muted);
   }
 
   .group{ margin-top:30px; text-align:left; }
@@ -137,7 +129,6 @@
     vertical-align:6px; margin-right:8px;
   }
   .brand-lockup .dv{ font-family:var(--deva); font-weight:700; font-size:26px; }
-  .foot p{ margin-top:8px; color:var(--muted); font-size:13px; letter-spacing:.04em; }
 
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
@@ -162,7 +153,8 @@
   </header>
 
   <nav class="jump" role="tablist" aria-label="Menu sections">
-    <button role="tab" id="tab-drinks" class="on" aria-selected="true"  aria-controls="drinks" data-tab="drinks">Drinks</button>
+    <button role="tab" id="tab-all"    class="on" aria-selected="true"  aria-controls="drinks snacks bar" data-tab="all">All</button>
+    <button role="tab" id="tab-drinks" aria-selected="false" aria-controls="drinks" data-tab="drinks">Drinks</button>
     <button role="tab" id="tab-snacks" aria-selected="false" aria-controls="snacks" data-tab="snacks">Snacks</button>
     <button role="tab" id="tab-bar"    aria-selected="false" aria-controls="bar"    data-tab="bar">Bar</button>
   </nav>
@@ -172,11 +164,18 @@
     <h2>Hot &amp; Cold Drinks</h2>
 
     <div class="group">
-      <h3>Chiya &amp; Coffee</h3>
+      <h3>Chiya</h3>
       <div class="item"><span class="nm">Milk Tea</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>40</span></div>
+      <div class="item"><span class="nm">Masala Milk Tea</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>60</span></div>
       <div class="item"><span class="nm">Black Tea</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>30</span></div>
       <div class="item"><span class="nm">Lemon Tea</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>40</span></div>
-      <div class="item"><span class="nm">Cold Coffee <span class="sp">✦ Adda Special</span></span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>200</span></div>
+      <div class="item"><span class="nm">Hot Lemon with Honey</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>120</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Cold Coffee</h3>
+      <div class="item"><span class="nm">Cold Coffee</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>250</span></div>
+      <div class="item"><span class="nm">Cold Coffee "The Adda" <span class="sp">✦ Adda Special</span></span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>300</span></div>
       <p class="desc">blended thick &amp; frosty, the house way</p>
     </div>
 
@@ -206,42 +205,85 @@
     </div>
 
     <div class="group">
-      <h3>Chowmein</h3>
+      <h3>Noodles</h3>
       <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Veg Chowmein</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>150</span></div>
       <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Egg Chowmein</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>180</span></div>
-      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Chowmein</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>190</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Buff Chowmein</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>190</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Chowmein</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>200</span></div>
       <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Mix Chowmein</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>220</span></div>
       <p class="desc">wok-tossed noodles, high flame</p>
     </div>
 
     <div class="group">
-      <h3>Fried Rice</h3>
-      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Veg Fried Rice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>200</span></div>
-      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Fried Rice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>250</span></div>
+      <h3>Fry Rice</h3>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Veg Fry Rice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>160</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Egg Fry Rice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>190</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Buff Fry Rice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>200</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Fry Rice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>220</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Sandwich</h3>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Veg Sandwich</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>100</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Sandwich</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>150</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Choila</h3>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Buff Choila</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>200</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Choila</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>220</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Sadeko &amp; Salad</h3>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Wai Wai Sadeko</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>120</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Sadeko</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>200</span></div>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Green Salad</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>130</span></div>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Russian Salad</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>300</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Sides &amp; Bites</h3>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Potato Chips</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>130</span></div>
+      <div class="item"><span class="nm"><span class="mark v" title="Veg"></span>Kaju Fry</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>450</span></div>
+      <div class="item"><span class="nm"><span class="mark n" title="Non-veg"></span>Chicken Chilli</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>250</span></div>
     </div>
   </section>
 
   <!-- ================= BAR ================= -->
   <section id="bar" class="panel" role="tabpanel" aria-labelledby="tab-bar">
     <h2>The Bar</h2>
-    <p class="sec-note">Beer 650 ml &nbsp;·&nbsp; Whiskey &amp; Rum 30 ml peg</p>
 
     <div class="group">
-      <h3>Beer</h3>
-      <div class="item"><span class="nm">Tuborg</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>550</span></div>
-      <div class="item"><span class="nm">Gorkha Strong</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>500</span></div>
-      <div class="item"><span class="nm">Barahsinghe</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>550</span></div>
+      <h3>Beer · 650 ml</h3>
+      <div class="item"><span class="nm">Tuborg</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>650</span></div>
+      <div class="item"><span class="nm">Gorkha</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>490</span></div>
+      <div class="item"><span class="nm">Barahsinghe</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>630</span></div>
     </div>
 
     <div class="group">
-      <h3>Whiskey</h3>
-      <div class="item"><span class="nm">Gurkhas &amp; Guns</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>350</span></div>
-      <div class="item"><span class="nm">Himalayan Reserve</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>400</span></div>
+      <h3>Whiskey · Full Bottle</h3>
+      <div class="item"><span class="nm">Old Durbar Red</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>3800</span></div>
+      <div class="item"><span class="nm">Old Durbar Black</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>4300</span></div>
     </div>
 
     <div class="group">
-      <h3>Rum</h3>
-      <div class="item"><span class="nm">Khukri Rum</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>250</span></div>
+      <h3>Vodka · Full Bottle</h3>
+      <div class="item"><span class="nm">8848 Vodka</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>2850</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Wine · Big Bottle</h3>
+      <div class="item"><span class="nm">Wine</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>1250 / 1350</span></div>
+    </div>
+
+    <div class="group">
+      <h3>Smokes</h3>
+      <div class="item"><span class="nm">Surya Red</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>30</span></div>
+      <div class="item"><span class="nm">Surya Light</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>30</span></div>
+      <div class="item"><span class="nm">Surya Ice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>35</span></div>
+      <div class="item"><span class="nm">Shikhar Ice</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>25</span></div>
+      <div class="item"><span class="nm">Hookah · Cloud</span><span class="gap"></span><span class="pr"><span class="cur">NPR</span>550</span></div>
     </div>
   </section>
 
@@ -258,10 +300,12 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   tabs.forEach(btn => btn.addEventListener('click', () => {
     tabs.forEach(t => { const on = t === btn; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
-    panels.forEach(p => p.classList.toggle('active', p.id === btn.dataset.tab));
+    panels.forEach(p => p.classList.toggle('active', btn.dataset.tab === 'all' || p.id === btn.dataset.tab));
     const top = nav.offsetTop;
     if (window.scrollY > top) window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
   }));
+  // "All" is default — show every panel on load
+  panels.forEach(p => p.classList.add('active'));
 
   if ('serviceWorker' in navigator && location.protocol === 'https:')
     navigator.serviceWorker.register('./sw.js').catch(() => {});
